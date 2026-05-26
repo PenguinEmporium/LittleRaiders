@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cpnpq0aesu5ch"]
+
+[ext_resource type="PackedScene" uid="uid://b6s0rxers84wn" path="res://base_player.tscn" id="1_u52ul"]
+[ext_resource type="Script" uid="uid://bg2l3fd4j8aml" path="res://camera_rig.gd" id="1_vonw3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u52ul"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_vonw3"]
+sky_material = SubResource("ProceduralSkyMaterial_u52ul")
+
+[sub_resource type="Environment" id="Environment_oi3di"]
+background_mode = 2
+sky = SubResource("Sky_vonw3")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5xgho"]
+size = Vector3(10, 0.5, 25)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u52ul"]
+size = Vector2(10, 25)
+
+[sub_resource type="Curve3D" id="Curve3D_vonw3"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -12),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Level" type="Node3D" unique_id=1521079059]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=639634325]
+environment = SubResource("Environment_oi3di")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=485398892]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Section-Entrance" type="Node3D" parent="." unique_id=109219766]
+
+[node name="StaticFloor" type="StaticBody3D" parent="Section-Entrance" unique_id=768208591]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Section-Entrance/StaticFloor" unique_id=964876348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_5xgho")
+
+[node name="Floor" type="MeshInstance3D" parent="Section-Entrance" unique_id=659710787]
+mesh = SubResource("PlaneMesh_u52ul")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=649786487]
+script = ExtResource("1_vonw3")
+
+[node name="CameraTrack" type="Path3D" parent="CameraRig" unique_id=1272233610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+curve = SubResource("Curve3D_vonw3")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="CameraRig/CameraTrack" unique_id=857195166]
+transform = Transform3D(1, 0, 0, 0, 0.9863939, 0.16439897, 0, -0.16439897, 0.9863939, 0, 2, 12)
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/CameraTrack/PathFollow3D" unique_id=969367567]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+
+[node name="Player" parent="." unique_id=1948355632 instance=ExtResource("1_u52ul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6478195, 0, 5.0677)
