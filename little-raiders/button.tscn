@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://d3rbvureh6y1x"]
+
+[ext_resource type="Script" uid="uid://b4jhdrc6wk5de" path="res://button.gd" id="1_r04n3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vvm8"]
+size = Vector3(2, 0.25, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r04n3"]
+top_radius = 0.8
+bottom_radius = 0.9
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4tde"]
+albedo_color = Color(0.84599864, 0, 0.13873518, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vxja4"]
+size = Vector3(2, 0.15, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lt4la"]
+albedo_color = Color(1, 0.69580585, 0.5814854, 1)
+
+[node name="Button" type="Node3D" unique_id=216237953]
+script = ExtResource("1_r04n3")
+
+[node name="InteractArea" type="Area3D" parent="." unique_id=2067563943]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" unique_id=504668818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_0vvm8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2087966834]
+
+[node name="Button" type="MeshInstance3D" parent="." unique_id=1612500009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("CylinderMesh_r04n3")
+surface_material_override/0 = SubResource("StandardMaterial3D_n4tde")
+
+[node name="ButtonStand" type="MeshInstance3D" parent="." unique_id=1279120742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
+mesh = SubResource("BoxMesh_vxja4")
+surface_material_override/0 = SubResource("StandardMaterial3D_lt4la")
+
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

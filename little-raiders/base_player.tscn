@@ -17,7 +17,9 @@ script = ExtResource("1_qp1xa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_14lbm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1463778390]
+[node name="Pivot" type="Node3D" parent="." unique_id=979815290]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" unique_id=1463778390]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_qp1xa")
 mesh = SubResource("CapsuleMesh_xxaf0")

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c7eiwiwun01rg"]
+
+[ext_resource type="Script" uid="uid://dtb2wf1kfu3l7" path="res://coin_pickup.gd" id="1_u1d6l"]
+[ext_resource type="Material" uid="uid://dn401v8c8vybv" path="res://rose_gold.tres" id="2_f4i30"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f4i30"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_gfo33"]
+
+[node name="Coin_Pickup" type="Node3D" unique_id=2049918345]
+script = ExtResource("1_u1d6l")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=556090857]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=833226014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_f4i30")
+
+[node name="RingMesh" type="MeshInstance3D" parent="." unique_id=1134738747]
+transform = Transform3D(0.43, 0, 0, 0, -1.8795896e-08, -0.43, 0, 0.43, -1.8795896e-08, 0, 1, 0)
+mesh = SubResource("TorusMesh_gfo33")
+surface_material_override/0 = ExtResource("2_f4i30")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

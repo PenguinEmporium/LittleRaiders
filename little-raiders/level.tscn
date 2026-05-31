@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b6s0rxers84wn" path="res://base_player.tscn" id="1_u52ul"]
 [ext_resource type="Script" uid="uid://bg2l3fd4j8aml" path="res://camera_rig.gd" id="1_vonw3"]
+[ext_resource type="PackedScene" uid="uid://c7eiwiwun01rg" path="res://coin_pickup.tscn" id="3_oi3di"]
+[ext_resource type="PackedScene" uid="uid://2ls5r68ytkkw" path="res://door.tscn" id="4_0b4ue"]
+[ext_resource type="PackedScene" uid="uid://d3rbvureh6y1x" path="res://button.tscn" id="5_f2txt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u52ul"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -92,3 +95,21 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 
 [node name="Player" parent="." unique_id=1948355632 instance=ExtResource("1_u52ul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6478195, 0, 5.0677)
+
+[node name="Coin_Pickup" parent="." unique_id=2049918345 instance=ExtResource("3_oi3di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -7)
+
+[node name="Coin_Pickup2" parent="." unique_id=778191685 instance=ExtResource("3_oi3di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+
+[node name="Coin_Pickup3" parent="." unique_id=1568383589 instance=ExtResource("3_oi3di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7)
+
+[node name="Door" parent="." unique_id=1909680701 instance=ExtResource("4_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -11)
+
+[node name="Button" parent="." unique_id=216237953 instance=ExtResource("5_f2txt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+
+[connection signal="on_pressed" from="Button" to="Door" method="slam_open"]
+[connection signal="on_released" from="Button" to="Door" method="slam_close"]
